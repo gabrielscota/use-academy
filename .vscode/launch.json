@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch in Debug mode",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+    },
+    {
+      "name": "Launch in Profile mode",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+    },
+    {
+      "name": "Launch in Release mode",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+    },
+  ]
+}
