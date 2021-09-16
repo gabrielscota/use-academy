@@ -7,21 +7,31 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
+        child: SizedBox.expand(
+          child: Container(
             color: Colors.blue,
-          ),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              minHeight: 100,
-              maxHeight: 200,
-              minWidth: 150,
-              maxWidth: 300,
-            ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const [
-                Text("Teste ConstrainedBox"),
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.green,
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Container(
+                    color: Colors.amber,
+                    child: const Text('Teste'),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    color: Colors.red,
+                  ),
+                ),
               ],
             ),
           ),
