@@ -19,6 +19,15 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Use Academy'),
           centerTitle: true,
+          actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 12.0),
+              child: Icon(Icons.book),
+            ),
+          ],
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.0)),
+          ),
         ),
         backgroundColor: Colors.white,
         bottomNavigationBar: BottomNavigationBar(
