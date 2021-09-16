@@ -11,7 +11,20 @@ class HomePage extends StatelessWidget {
           decoration: const BoxDecoration(
             color: Colors.blue,
           ),
-          child: Image.asset('lib/assets/images/image01.jpg'),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minHeight: 100,
+              maxHeight: 200,
+              minWidth: 150,
+              maxWidth: 300,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: const [
+                Text("Teste ConstrainedBox"),
+              ],
+            ),
+          ),
         ),
       ),
     );
