@@ -7,27 +7,18 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SizedBox.expand(
-          child: Container(
-            color: Colors.white,
-            child: Stack(
-              alignment: Alignment.center,
+        child: Container(
+          color: Colors.white,
+          child: LayoutBuilder(
+            builder: (context, constraints) => Row(
               children: [
-                Positioned(
-                  height: 100,
-                  width: 200,
-                  left: 0,
-                  top: 0,
-                  child: Container(
-                    color: Colors.red,
-                  ),
+                Container(
+                  color: Colors.red,
+                  width: constraints.maxWidth * 0.7,
                 ),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxHeight: 400,
-                    maxWidth: 300,
-                  ),
-                  child: Container(color: Colors.amber),
+                Container(
+                  color: Colors.green,
+                  width: constraints.maxWidth * 0.3,
                 ),
               ],
             ),
