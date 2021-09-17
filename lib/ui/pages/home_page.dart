@@ -10,24 +10,24 @@ class HomePage extends StatelessWidget {
         child: SizedBox.expand(
           child: Container(
             color: Colors.white,
-            child: IndexedStack(
+            child: Stack(
               alignment: Alignment.center,
-              index: 1,
               children: [
-                Container(
-                  height: 400,
-                  width: 300,
-                  color: Colors.red,
+                Positioned(
+                  height: 100,
+                  width: 200,
+                  left: 0,
+                  top: 0,
+                  child: Container(
+                    color: Colors.red,
+                  ),
                 ),
-                Container(
-                  height: 400,
-                  width: 300,
-                  color: Colors.green,
-                ),
-                Container(
-                  height: 400,
-                  width: 300,
-                  color: Colors.blue,
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxHeight: 400,
+                    maxWidth: 300,
+                  ),
+                  child: Container(color: Colors.amber),
                 ),
               ],
             ),
