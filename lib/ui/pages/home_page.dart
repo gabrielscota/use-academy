@@ -8,27 +8,88 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SizedBox.expand(
-          child: ListView.separated(
-            itemCount: 20,
-            itemBuilder: (context, index) => ListTile(
-              title: const Text('Titulo'),
-              subtitle: const Text('Sub titulo'),
-              leading: CircleAvatar(
-                child: const Text('G'),
-                backgroundImage: Image.asset('lib/assets/images/image01.jpg').image,
-                foregroundColor: Colors.red,
-              ),
-              // trailing: InkWell(
-              //   onTap: () => debugPrint('onTap no trailing: $index'),
-              //   child: const Icon(Icons.edit),
-              // ),
-              tileColor: Colors.blue[200],
-              onTap: () => debugPrint('onTap no trailing: $index'),
-              horizontalTitleGap: 32.0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-            ),
-            separatorBuilder: (context, index) => const SizedBox(height: 16.0),
+          child: Column(
+            children: [
+              FirstContainer(),
+              const SecondContainer(),
+            ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondContainer extends StatefulWidget {
+  const SecondContainer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<SecondContainer> createState() => _SecondContainerState();
+}
+
+class _SecondContainerState extends State<SecondContainer> {
+  late String name;
+
+  @override
+  void initState() {
+    name = 'Gabriel';
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        color: Colors.green[100],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(name),
+            const SizedBox(width: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  name = 'João';
+                });
+                debugPrint(name);
+              },
+              child: const Text('Trocar nome'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FirstContainer extends StatelessWidget {
+  FirstContainer({
+    Key? key,
+  }) : super(key: key);
+
+  String name = 'Gabriel';
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        color: Colors.blue[100],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(name),
+            const SizedBox(width: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                name = 'João';
+                debugPrint(name);
+              },
+              child: const Text('Trocar nome'),
+            ),
+          ],
         ),
       ),
     );
