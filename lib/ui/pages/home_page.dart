@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'pages.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -9,9 +11,9 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: SizedBox.expand(
           child: Column(
-            children: [
+            children: const [
               FirstContainer(),
-              const SecondContainer(),
+              SecondContainer(),
             ],
           ),
         ),
@@ -29,14 +31,59 @@ class SecondContainer extends StatefulWidget {
   State<SecondContainer> createState() => _SecondContainerState();
 }
 
+class NavigationArguments {
+  final String routeName;
+  final Object? arguments;
+
+  NavigationArguments({required this.routeName, this.arguments});
+}
+
+class ProfileNavigationArguments {
+  final String name;
+  final int age;
+  final double height;
+
+  ProfileNavigationArguments({required this.name, required this.age, required this.height});
+}
+
 class _SecondContainerState extends State<SecondContainer> {
+  late String text;
   late String name;
+  late int age;
+  late double height;
 
   @override
   void initState() {
+    text = 'Profile Page';
     name = 'Gabriel';
+    age = 21;
+    height = 1.75;
 
     super.initState();
+  }
+
+  void goToProfilePage() {
+    final ProfileNavigationArguments profileArguments = ProfileNavigationArguments(
+      name: name,
+      age: age,
+      height: height,
+    );
+
+    final NavigationArguments arguments = NavigationArguments(
+      routeName: '/profile',
+      arguments: profileArguments,
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ProfilePage(),
+        settings: RouteSettings(
+          name: '/profile',
+          arguments: arguments,
+        ),
+      ),
+    );
   }
 
   @override
@@ -44,19 +91,22 @@ class _SecondContainerState extends State<SecondContainer> {
     return Expanded(
       child: Container(
         color: Colors.green[100],
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(name),
-            const SizedBox(width: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  name = 'João';
-                });
-                debugPrint(name);
-              },
-              child: const Text('Trocar nome'),
+            Text('Nome: $name'),
+            Text('Idade: $age'),
+            const SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(text),
+                const SizedBox(width: 16.0),
+                ElevatedButton(
+                  onPressed: goToProfilePage,
+                  child: const Text('Ir para a tela'),
+                ),
+              ],
             ),
           ],
         ),
@@ -66,28 +116,53 @@ class _SecondContainerState extends State<SecondContainer> {
 }
 
 class FirstContainer extends StatelessWidget {
-  FirstContainer({
+  const FirstContainer({
     Key? key,
   }) : super(key: key);
 
-  String name = 'Gabriel';
+  final String text = 'Profile Page';
+  final String name = 'Gabriel';
+  final int age = 21;
+
+  void goToProfilePage(BuildContext context) {
+    final Map<String, dynamic> arguments = {
+      "name": name,
+      "age": age,
+    };
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ProfilePage(),
+        settings: RouteSettings(
+          name: '/profile',
+          arguments: arguments,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
         color: Colors.blue[100],
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(name),
-            const SizedBox(width: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                name = 'João';
-                debugPrint(name);
-              },
-              child: const Text('Trocar nome'),
+            Text('Nome: $name'),
+            Text('Idade: $age'),
+            const SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(text),
+                const SizedBox(width: 16.0),
+                ElevatedButton(
+                  onPressed: () => goToProfilePage(context),
+                  child: const Text('Ir para a tela'),
+                ),
+              ],
             ),
           ],
         ),
