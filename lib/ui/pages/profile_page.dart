@@ -2,8 +2,31 @@ import 'package:flutter/material.dart';
 
 import 'pages.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late bool isCorrect;
+
+  @override
+  void initState() {
+    isCorrect = true;
+    debugPrint(isCorrect.toString());
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    isCorrect = false;
+    debugPrint(isCorrect.toString());
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
