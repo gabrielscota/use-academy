@@ -86,6 +86,10 @@ class _SecondContainerState extends State<SecondContainer> {
     );
   }
 
+  Color borderColor = Colors.blue;
+  Color backgroundColor = Colors.white;
+  Widget checkboxContent = const SizedBox();
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -97,6 +101,18 @@ class _SecondContainerState extends State<SecondContainer> {
             Text('Nome: $name'),
             Text('Idade: $age'),
             const SizedBox(height: 16.0),
+            Container(
+              height: 32.0,
+              width: 32.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(
+                  color: borderColor,
+                  width: 2.0,
+                ),
+              ),
+              child: checkboxContent,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
