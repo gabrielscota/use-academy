@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'pages.dart';
 
@@ -16,6 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     isCorrect = true;
     debugPrint(isCorrect.toString());
+    loadAvatar();
 
     super.initState();
   }
@@ -26,6 +28,14 @@ class _ProfilePageState extends State<ProfilePage> {
     debugPrint(isCorrect.toString());
 
     super.dispose();
+  }
+
+  bool isLoadedAvatar = false;
+  Future<void> loadAvatar() async {
+    await Future.delayed(const Duration(seconds: 3));
+    setState(() {
+      isLoadedAvatar = true;
+    });
   }
 
   @override
@@ -47,6 +57,43 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              isLoadedAvatar
+                  ? Container(
+                      height: 96.0,
+                      width: 96.0,
+                      margin: const EdgeInsets.only(bottom: 16.0),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      child: Text(
+                        'G',
+                        style: Theme.of(context).textTheme.headline4?.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                      ),
+                    )
+                  : Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        height: 96.0,
+                        width: 96.0,
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(bottom: 16.0),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Text(
+                          'G',
+                          style: Theme.of(context).textTheme.headline4?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                        ),
+                      ),
+                    ),
               const Text('Profile Page'),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
