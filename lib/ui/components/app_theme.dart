@@ -14,6 +14,7 @@ mixin AppTheme {
   static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
     return ThemeData(
       canvasColor: colorScheme.background,
+      backgroundColor: colorScheme.background,
       colorScheme: colorScheme,
       disabledColor: colorScheme.onBackground.withAlpha(40),
       dividerColor: colorScheme.onBackground.withAlpha(40),
