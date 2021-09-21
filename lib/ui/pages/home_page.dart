@@ -110,13 +110,19 @@ class _SecondContainerState extends State<SecondContainer> {
                   color: borderColor,
                   width: 2.0,
                 ),
+                color: Theme.of(context).primaryColor,
               ),
               child: checkboxContent,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(text),
+                Text(
+                  text,
+                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                        color: Colors.blue,
+                      ),
+                ),
                 const SizedBox(width: 16.0),
                 ElevatedButton(
                   onPressed: goToProfilePage,
