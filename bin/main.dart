@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 Future<void> addEventsToStream(StreamController presenter) async {
@@ -17,7 +19,7 @@ void main() async {
   //adicionando um listener ao stream que vai ouvir o stram
   presenter.stream.listen(
     (data) async {
-      print('${data}');
+      print('$data');
     },
     onError: (error) {
       print(error);
