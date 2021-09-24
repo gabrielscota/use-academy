@@ -50,24 +50,26 @@ class HttpAdapter implements HttpClient {
 
     final jsonBody = body != null ? jsonEncode(body) : null;
 
-    Response futureResponse = Response('', 500);
+    Response response = Response('', 500);
+    late Future<Response>? futureResponse;
 
     try {
-      late Future<Response> response;
       if (method == 'post') {
-        response = client.post(Uri.parse(url), headers: defaultHeaders, body: jsonBody);
+        futureResponse = client.post(Uri.parse(url), headers: defaultHeaders, body: jsonBody);
       } else if (method == 'get') {
-        response = client.get(Uri.parse(url), headers: defaultHeaders);
+        futureResponse = client.get(Uri.parse(url), headers: defaultHeaders);
       } else if (method == 'put') {
-        response = client.put(Uri.parse(url), headers: defaultHeaders, body: jsonBody);
+        futureResponse = client.put(Uri.parse(url), headers: defaultHeaders, body: jsonBody);
       }
 
-      futureResponse = await response.timeout(const Duration(seconds: 10));
+      if (futureResponse != null) {
+        response = await futureResponse.timeout(const Duration(seconds: 10));
+      }
     } catch (error) {
       throw HttpError.serverError;
     }
 
-    return _handleResponse(futureResponse);
+    return _handleResponse(response);
   }
 
   dynamic _handleResponse(Response response) {
