@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'pages.dart';
+import '../pages.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final ProfilePresenter presenter;
+
+  const ProfilePage({Key? key, required this.presenter}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -18,6 +20,8 @@ class _ProfilePageState extends State<ProfilePage> {
     isCorrect = true;
     debugPrint(isCorrect.toString());
     loadAvatar();
+
+    widget.presenter.loadPerson();
 
     super.initState();
   }
