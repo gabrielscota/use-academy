@@ -1,3 +1,3 @@
-export 'home_page.dart';
-export 'profile_page.dart';
-export 'splash_page.dart';
+export 'home/home.dart';
+export 'profile/profile.dart';
+export 'splash/splash.dart';
