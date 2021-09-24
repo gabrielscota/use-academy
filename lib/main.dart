@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'presentation/presenters/presenters.dart';
 import 'ui/components/components.dart';
 import 'ui/pages/pages.dart';
 
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashPage(),
         '/home': (context) => const HomePage(),
-        '/profile': (context) => const ProfilePage(),
+        '/profile': (context) => ProfilePage(
+              presenter: StreamProfilePresenter(),
+            ),
       },
     );
   }
