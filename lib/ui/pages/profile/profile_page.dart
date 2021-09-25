@@ -44,17 +44,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)?.settings.arguments;
-    Map<String, dynamic> argumentsMap = {};
-    ProfileNavigationArguments profileArguments = ProfileNavigationArguments(name: '', age: 0, height: 0);
-
-    if (arguments is Map) {
-      argumentsMap = arguments as Map<String, dynamic>;
-    } else {
-      NavigationArguments argumentsClass = arguments as NavigationArguments;
-      profileArguments = argumentsClass.arguments as ProfileNavigationArguments;
-    }
-
     return Scaffold(
       body: SafeArea(
         child: SizedBox.expand(
@@ -153,9 +142,9 @@ class _ProfilePageState extends State<ProfilePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Column(
-                  children: [
-                    Text('Nome: ${argumentsMap.isNotEmpty ? argumentsMap['name'] : profileArguments.name}'),
-                    Text('Idade: ${argumentsMap.isNotEmpty ? argumentsMap['age'] : profileArguments.age}'),
+                  children: const [
+                    Text('Nome: Gabriel'),
+                    Text('Idade: 21'),
                   ],
                 ),
               ),
