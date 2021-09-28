@@ -1,7 +1,7 @@
-import '../../../data/models/models.dart';
+import '../../../domain/entities/entities.dart';
 
 abstract class HomePresenter {
-  Stream<List<RemotePersonModel>> get peopleStream;
+  Stream<List<PersonEntity>> get peopleStream;
 
   Future<void> loadPersons();
 }
