@@ -5,7 +5,6 @@ import 'package:http/http.dart';
 import 'data/usecases/usecases.dart';
 import 'infra/infra.dart';
 import 'presentation/presenters/presenters.dart';
-import 'presentation/presenters/stream_home_presenter.dart';
 import 'ui/components/components.dart';
 import 'ui/pages/pages.dart';
 
