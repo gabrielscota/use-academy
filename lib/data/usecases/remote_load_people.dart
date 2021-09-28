@@ -14,7 +14,7 @@ class RemoteLoadPeople implements LoadPeople {
 
   @override
   Future<List<PersonEntity>> loadPeople() async {
-    final List<dynamic> response = await httpClient.request(url: '$url/people', method: 'get');
+    final List<dynamic> response = await httpClient.request(url: url, method: 'get');
 
     return response.map((person) => RemotePersonModel.fromJson(person as Map<String, dynamic>).toEntity()).toList();
   }
