@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashPage(),
         '/home': (context) => HomePage(
-              presenter: StreamHomePresenter(
+              presenter: GetxHomePresenter(
                 loadPeople: RemoteLoadPeople(
                   httpClient: HttpAdapter(client: Client()),
                   url: 'https://6140bdba357db50017b3d87d.mockapi.io/people',
