@@ -1,3 +1,5 @@
+import 'package:use_academy/domain/entities/entities.dart';
+
 class RemotePersonModel {
   final String id;
   final String name;
@@ -19,5 +21,12 @@ class RemotePersonModel {
         age: (json['age'] ?? 0) as int,
         height: (json['height'] ?? 0) as int,
         weight: (json['weight'] ?? 0) as int,
+      );
+
+  PersonEntity toEntity() => PersonEntity(
+        id: id,
+        name: name,
+        age: age,
+        height: height.toDouble(),
       );
 }
