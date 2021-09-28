@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 
+import 'data/usecases/usecases.dart';
 import 'infra/infra.dart';
 import 'presentation/presenters/presenters.dart';
 import 'presentation/presenters/stream_home_presenter.dart';
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => const SplashPage(),
         '/home': (context) => HomePage(
               presenter: StreamHomePresenter(
-                client: HttpAdapter(
-                  client: Client(),
+                loadPeople: RemoteLoadPeople(
+                  httpClient: HttpAdapter(client: Client()),
+                  url: 'https://6140bdba357db50017b3d87d.mockapi.io/people',
                 ),
               ),
             ),
