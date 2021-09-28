@@ -22,7 +22,6 @@ class GetxHomePresenter extends GetxController implements HomePresenter {
   Future<void> loadPersons() async {
     try {
       final List<PersonEntity> people = await loadPeople.loadPeople();
-      print('called loadPersons');
       _people.subject.add(people);
     } on HttpError catch (error) {
       debugPrint(error.toString());
