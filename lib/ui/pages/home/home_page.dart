@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/models/models.dart';
+import '../../../domain/entities/entities.dart';
 import '../pages.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: StreamBuilder<List<RemotePersonModel>>(
+                  child: StreamBuilder<List<PersonEntity>>(
                     stream: widget.presenter.peopleStream,
                     builder: (context, snapshot) {
                       if (snapshot.hasData && snapshot.data!.isNotEmpty) {
