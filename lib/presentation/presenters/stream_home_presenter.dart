@@ -2,31 +2,26 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import '../../data/models/models.dart';
-import '../../infra/http/http.dart';
-import '../../shared/api_url.dart';
+import '../../data/http/http.dart';
+import '../../domain/entities/entities.dart';
+import '../../domain/usecases/usecases.dart';
 import '../../ui/pages/pages.dart';
 
 class StreamHomePresenter implements HomePresenter {
-  final HttpClient client;
+  final LoadPeople loadPeople;
 
   StreamHomePresenter({
-    required this.client,
+    required this.loadPeople,
   });
 
-  final StreamController<List<RemotePersonModel>> peopleStreamController = StreamController<List<RemotePersonModel>>();
+  final StreamController<List<PersonEntity>> peopleStreamController = StreamController<List<PersonEntity>>();
 
-  Stream<List<RemotePersonModel>> get peopleStream => peopleStreamController.stream;
+  Stream<List<PersonEntity>> get peopleStream => peopleStreamController.stream;
 
   Future<void> loadPersons() async {
     try {
-      final List<dynamic>? response = await client.request(url: '$apiUrl/people', method: 'get');
-
-      if (response != null) {
-        List<RemotePersonModel> people =
-            response.map((person) => RemotePersonModel.fromJson(person as Map<String, dynamic>)).toList();
-        peopleStreamController.add(people);
-      }
+      final List<PersonEntity> people = await loadPeople.loadPeople();
+      peopleStreamController.add(people);
     } on HttpError catch (error) {
       debugPrint(error.toString());
     }
