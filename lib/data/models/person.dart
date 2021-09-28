@@ -1,4 +1,4 @@
-import 'package:use_academy/domain/entities/entities.dart';
+import '../../domain/entities/entities.dart';
 
 class RemotePersonModel {
   final String id;
