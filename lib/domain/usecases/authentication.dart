@@ -1,5 +1,5 @@
 abstract class Authentication {
-  Future<void> authWithEmailAndPassword({AuthenticationWithEmailAndPasswordParams params});
+  Future<void> authWithEmailAndPassword({required AuthenticationWithEmailAndPasswordParams params});
 }
 
 class AuthenticationWithEmailAndPasswordParams {
