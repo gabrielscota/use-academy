@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 
 import 'data/usecases/usecases.dart';
 import 'infra/infra.dart';
+import 'main/factories/factories.dart';
 import 'presentation/presenters/presenters.dart';
 import 'ui/components/components.dart';
 import 'ui/pages/pages.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashPage(),
+        '/login': (context) => makeLoginPage(),
         '/home': (context) => HomePage(
               presenter: GetxHomePresenter(
                 loadPeople: RemoteLoadPeople(
