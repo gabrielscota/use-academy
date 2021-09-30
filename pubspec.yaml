@@ -10,7 +10,8 @@ environment:
 
 dependencies:
   equatable: ^2.0.3
-  firebase_core: ^1.6.0
+  firebase_auth: ^3.1.2
+  firebase_core: ^1.7.0
   firebase_crashlytics: ^2.2.1
   flutter:
     sdk: flutter
