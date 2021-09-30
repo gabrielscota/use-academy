@@ -9,10 +9,51 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Text('Login Page'),
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StreamBuilder<String>(
+                stream: presenter.emailErrorStream,
+                builder: (context, snapshot) {
+                  return TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      errorText: snapshot.hasData && snapshot.data!.isEmpty ? null : snapshot.data,
+                    ),
+                    onChanged: presenter.validateEmail,
+                  );
+                },
+              ),
+              const SizedBox(height: 12.0),
+              StreamBuilder<String>(
+                stream: presenter.passwordErrorStream,
+                builder: (context, snapshot) {
+                  return TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Senha',
+                      errorText: snapshot.hasData && snapshot.data!.isEmpty ? null : snapshot.data,
+                    ),
+                    onChanged: presenter.validatePassword,
+                  );
+                },
+              ),
+              const SizedBox(height: 16.0),
+              StreamBuilder<bool>(
+                stream: presenter.isFormValidStream,
+                builder: (context, snapshot) {
+                  return ElevatedButton(
+                    onPressed: snapshot.hasData && snapshot.data == true ? presenter.auth : null,
+                    child: const Text('Entrar'),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
