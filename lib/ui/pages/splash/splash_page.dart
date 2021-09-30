@@ -9,7 +9,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   Future<void> loadUserInfo() async {
-    const String token = '3126513216513';
+    const String token = '31265132165135';
     await Future.delayed(const Duration(seconds: 2));
     if (token == '3126513216513' && mounted == true) {
       Navigator.pushReplacementNamed(context, '/home');
