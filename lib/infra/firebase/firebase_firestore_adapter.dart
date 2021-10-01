@@ -8,4 +8,10 @@ class FirebaseCloudFirestoreAdapter implements FirebaseCloudFirestore {
   FirebaseCloudFirestoreAdapter({
     required this.firebaseFirestore,
   });
+
+  @override
+  Future<CollectionReference> getCollectionReference({required String collectionPath}) async {
+    CollectionReference reference = firebaseFirestore.collection(collectionPath);
+    return reference;
+  }
 }
