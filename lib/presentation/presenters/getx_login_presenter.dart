@@ -75,7 +75,7 @@ class GetxLoginPresenter extends GetxController implements LoginPresenter {
         email: _email,
         password: _password,
       );
-      userCredential.subject.add(_userCredential.credential!.token!.toString());
+      userCredential.subject.add(_userCredential.user!.uid.toString());
     } on FirebaseAuthError catch (error) {
       userCredentialError.subject.add(error.name);
     }

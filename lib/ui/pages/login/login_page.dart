@@ -2,10 +2,62 @@ import 'package:flutter/material.dart';
 
 import '../pages.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final LoginPresenter presenter;
 
   const LoginPage({Key? key, required this.presenter}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    widget.presenter.userCredentialStream.listen((event) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(
+                Icons.check_circle_outline_rounded,
+                color: Colors.white,
+                size: 32.0,
+              ),
+              const SizedBox(width: 12.0),
+              Text(event),
+            ],
+          ),
+          backgroundColor: Colors.green,
+          duration: const Duration(seconds: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        ),
+      );
+    });
+
+    widget.presenter.userCredentialErrorStream.listen((event) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(
+                Icons.close_rounded,
+                color: Colors.white,
+                size: 32.0,
+              ),
+              const SizedBox(width: 12.0),
+              Text(event),
+            ],
+          ),
+          backgroundColor: Colors.red.shade400,
+          duration: const Duration(seconds: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,36 +70,36 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               StreamBuilder<String>(
-                stream: presenter.emailErrorStream,
+                stream: widget.presenter.emailErrorStream,
                 builder: (context, snapshot) {
                   return TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Email',
                       errorText: snapshot.hasData && snapshot.data!.isEmpty ? null : snapshot.data,
                     ),
-                    onChanged: presenter.validateEmail,
+                    onChanged: widget.presenter.validateEmail,
                   );
                 },
               ),
               const SizedBox(height: 12.0),
               StreamBuilder<String>(
-                stream: presenter.passwordErrorStream,
+                stream: widget.presenter.passwordErrorStream,
                 builder: (context, snapshot) {
                   return TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Senha',
                       errorText: snapshot.hasData && snapshot.data!.isEmpty ? null : snapshot.data,
                     ),
-                    onChanged: presenter.validatePassword,
+                    onChanged: widget.presenter.validatePassword,
                   );
                 },
               ),
               const SizedBox(height: 16.0),
               StreamBuilder<bool>(
-                stream: presenter.isFormValidStream,
+                stream: widget.presenter.isFormValidStream,
                 builder: (context, snapshot) {
                   return ElevatedButton(
-                    onPressed: snapshot.hasData && snapshot.data == true ? presenter.auth : null,
+                    onPressed: snapshot.hasData && snapshot.data == true ? widget.presenter.auth : null,
                     child: const Text('Entrar'),
                   );
                 },
