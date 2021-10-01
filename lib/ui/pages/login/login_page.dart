@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../pages.dart';
 
@@ -16,25 +17,10 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
 
-    widget.presenter.userCredentialStream.listen((event) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Row(
-            children: [
-              const Icon(
-                Icons.check_circle_outline_rounded,
-                color: Colors.white,
-                size: 32.0,
-              ),
-              const SizedBox(width: 12.0),
-              Text(event),
-            ],
-          ),
-          backgroundColor: Colors.green,
-          duration: const Duration(seconds: 5),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        ),
-      );
+    widget.presenter.navigateToStream.listen((event) {
+      if (event.isNotEmpty) {
+        Get.offAllNamed(event);
+      }
     });
 
     widget.presenter.userCredentialErrorStream.listen((event) {
