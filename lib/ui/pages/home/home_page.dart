@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../domain/entities/entities.dart';
 import '../pages.dart';
@@ -40,10 +41,27 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: const Text('Use Academy'),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () async {
+            final logoutStatus = await widget.presenter.logout();
+            if (logoutStatus == true) {
+              Get.offAllNamed('/login');
+            }
+          },
+          icon: Icon(
+            Icons.logout_rounded,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SizedBox.expand(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.fromLTRB(24.0, 0.0, 24.0, 24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -54,6 +72,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                         return ListView.builder(
                           physics: const BouncingScrollPhysics(),
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
                           itemCount: snapshot.data?.length,
                           itemBuilder: (context, index) => ListTile(
                             title: Text(snapshot.data![index].name),
