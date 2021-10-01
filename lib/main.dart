@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 
@@ -31,19 +32,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       navigatorKey: _navigatorKey,
       title: 'Use Academy',
       theme: AppTheme.lightThemeData,
       darkTheme: AppTheme.darkThemeData,
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashPage(),
         '/login': (context) => makeLoginPage(),
         '/home': (context) => HomePage(
               presenter: GetxHomePresenter(
+                firebaseAuthentication: makeFirebaseAuthenticationAdapter(),
                 loadPeople: RemoteLoadPeople(
                   httpClient: HttpAdapter(client: Client()),
                   url: 'https://6140bdba357db50017b3d87d.mockapi.io/people',
