@@ -47,11 +47,13 @@ class MyApp extends StatelessWidget {
         '/login': (context) => makeLoginPage(),
         '/home': (context) => HomePage(
               presenter: GetxHomePresenter(
+                addUser: makeRemoteAddUser(),
                 firebaseAuthentication: makeFirebaseAuthenticationAdapter(),
                 loadPeople: RemoteLoadPeople(
                   httpClient: HttpAdapter(client: Client()),
                   url: 'https://6140bdba357db50017b3d87d.mockapi.io/people',
                 ),
+                loadUsers: makeRemoteLoadUsers(),
               ),
             ),
         '/profile': (context) => ProfilePage(

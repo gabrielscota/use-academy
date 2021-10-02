@@ -23,10 +23,23 @@ class RemotePersonModel {
         weight: (json['weight'] ?? 0) as int,
       );
 
+  factory RemotePersonModel.fromEntity(PersonEntity entity) => RemotePersonModel(
+        id: entity.id,
+        name: entity.name,
+        age: entity.age,
+        height: entity.height.toInt(),
+        weight: 0,
+      );
+
   PersonEntity toEntity() => PersonEntity(
         id: id,
         name: name,
         age: age,
         height: height.toDouble(),
       );
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'age': age,
+      };
 }

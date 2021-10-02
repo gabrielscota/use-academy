@@ -14,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
     if (token == '3126513216513' && mounted == true) {
       Navigator.pushReplacementNamed(context, '/home');
     } else {
-      Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 

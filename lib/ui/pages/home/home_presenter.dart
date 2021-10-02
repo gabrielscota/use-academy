@@ -5,4 +5,6 @@ abstract class HomePresenter {
 
   Future<void> loadPersons();
   Future<bool> logout();
+  Future<void> remoteAddUser({required String name});
+  Future<void> remoteLoadUsers();
 }

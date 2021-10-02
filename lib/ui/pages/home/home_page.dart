@@ -18,7 +18,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   void initState() {
     WidgetsBinding.instance!.addObserver(this);
 
-    widget.presenter.loadPersons();
+    // widget.presenter.loadPersons();
+    widget.presenter.remoteLoadUsers();
 
     super.initState();
   }
@@ -77,6 +78,13 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                           itemBuilder: (context, index) => ListTile(
                             title: Text(snapshot.data![index].name),
                             subtitle: Text(snapshot.data![index].age.toString()),
+                            trailing: IconButton(
+                              onPressed: () => widget.presenter.remoteAddUser(name: snapshot.data![index].name),
+                              icon: Icon(
+                                Icons.person_add_alt_1_rounded,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
                           ),
                         );
                       } else if (snapshot.hasData && snapshot.data!.isEmpty) {
@@ -86,10 +94,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       }
                     },
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: widget.presenter.loadPersons,
-                  child: const Text('Carregar pessoas'),
                 ),
               ],
             ),
